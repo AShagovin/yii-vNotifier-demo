@@ -5,6 +5,7 @@ This is usecase for yii-vNotifier extension. More info can be founded <a href="h
 ### Usage
 
 * set yii webapp
+* start redis server and node app
 * open the app in your browser, and login as admin (pw: admin)
 * open the app in your another browser, and login as demo (pw: demo)
 * open /site/send, and your message to admin, to demo, or send a broadcast message
