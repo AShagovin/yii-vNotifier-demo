@@ -1,8 +1,8 @@
 <?php
 /* @var $this SiteController */
-
-$this->pageTitle=Yii::app()->name;
-
-$this->widget('ext.yii-vNotifier.NotificationWidget');
 ?>
+
+<h1>Hello <?php echo Yii::app()->user->id;?></h1>
+	
+<?php $this->widget('ext.yii-vNotifier.NotificationWidget'); ?>
 

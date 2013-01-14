@@ -12,10 +12,15 @@
  */
 class MyWebApp extends CWebApplication {
 	/**
-	 *
 	 * @var VNotifier
 	 */
 	public $notifier;
+	/**
+	 *
+	 * @var NotifiedWebUser
+	 */
+	public $user;
+	
 }
 
 ?>

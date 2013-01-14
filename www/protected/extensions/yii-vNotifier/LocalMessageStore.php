@@ -62,13 +62,16 @@ class LocalMessageStore extends CComponent implements IMessageStore {
 	 * @param type $user_id
 	 * @return type
 	 */
-	public function generateUserSecret($user_id) {
-		$secret = self::genSecret();
-		while($this->_rc->exists($secret)) {
+	public function generateUserSecret($user_id,$refresh = false) {
+		$secret = $this->getUserSecret($user_id);
+		if(!$secret || $refresh) {
 			$secret = self::genSecret();
-		}
+			while($this->_rc->exists($secret)) {
+				$secret = self::genSecret();
+			}
 
-		$this->_rc->set($user_id,$secret);
+			$this->_rc->set($user_id,$secret);
+		}
 
 		return $secret;
 	}

@@ -8,9 +8,9 @@ vNotifier = {};
 vNotifier.Client = function(config) {
 		// socket io client
 	var socket = io.connect(config.socketioUrl + '?secret=' + config.userSecret),
-		// notification are
+		// notification area
 		notificationArea = document.getElementById('notification-area'),
-		// Knockout.JS View Model
+		// KnockoutJS View Model
 		viewModel = {
 			notifications : ko.observableArray()
 		};
@@ -20,6 +20,10 @@ vNotifier.Client = function(config) {
 	// handle notify event
 	socket.on('notify',function(message) {
 		viewModel.notifications.push({message : message});
+		// auto remove first message after 5sec
+		setTimeout(function() {
+			viewModel.notifications.shift();
+		}, 5000);
 	});
 
 }

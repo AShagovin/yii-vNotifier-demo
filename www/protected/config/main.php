@@ -35,7 +35,7 @@ return array(
 		'user'=>array(
 			'class' => 'ext.yii-vNotifier.NotifiedWebUser',
 			// enable cookie-based authentication
-			'allowAutoLogin'=>true,
+			'allowAutoLogin'=>false,
 		),
 		// uncomment the following to enable URLs in path-format
 		'urlManager'=>array(
@@ -66,6 +66,9 @@ return array(
 		),
 		'notifier' => array(
 			'class' => 'ext.yii-vNotifier.VNotifier',
+			'messageStoreConfig' => array(	
+				'class' => 'LocalMessageStore',
+			),
 		),
 		'log'=>array(
 			'class'=>'CLogRouter',

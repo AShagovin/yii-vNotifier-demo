@@ -27,10 +27,18 @@ class SiteController extends Controller
 	 */
 	public function actionIndex()
 	{
-		// renders the view file 'protected/views/site/index.php'
-		// using the default layout 'protected/views/layouts/main.php'
-
-		$this->render('index');
+		if($user = Yii::app()->request->getQuery('user')) {
+			$loginForm = new LoginForm();
+			$loginForm->username = $user;
+			$loginForm->password = $user;
+			$loginForm->login();
+			if(Yii::app()->user->isGuest) {
+				throw new CException("Not a valid user");
+			}
+			$this->renderPartial('index',null,false,true);
+		} else {
+			$this->render('index');
+		}
 	}
 
 	public function actionSend() {

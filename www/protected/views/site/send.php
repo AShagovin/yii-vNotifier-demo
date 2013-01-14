@@ -13,6 +13,16 @@
 <?php
 	echo CHtml::endForm();
 ?>
+
+<div class="left iframe">
+	<p>Iframe: Logged in as Admin user (/site/index?user=admin)</p>
+	<iframe src="/site/index?user=admin"></iframe>
+</div>
+<div class="right iframe">
+	<p>Iframe: Logged in as Demo user (/site/index?user=demo)</p>
+	<iframe src="/site/index?user=demo"></iframe>
+</div>
+
 <script type="text/javascript">
 	$(function() {
 		$('#notification-form').submit(function(event) {
