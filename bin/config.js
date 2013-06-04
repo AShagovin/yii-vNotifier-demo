@@ -1,8 +1,8 @@
 var config = {
 	port : 4000,
 	redis : {
-		port : '/tmp/redis.sock',
-		host : null
+		port : '6379',
+		host : 'localhost'
 	}
 };
 
