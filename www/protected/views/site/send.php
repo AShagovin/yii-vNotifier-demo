@@ -26,7 +26,6 @@
 <script type="text/javascript">
 	$(function() {
 		$('#notification-form').submit(function(event) {
-			console.log('submit');
 			event.preventDefault();
 			$.ajax({
 				url : '/site/send',

@@ -1,10 +1,5 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Description of NotifiedWebuser
  *
@@ -32,6 +27,10 @@ class NotifiedWebUser extends CWebUser {
 	}
 
 	
+	/**
+	 * afterLogin "callback"
+	 * @param type $fromCookie
+	 */
 	public function afterLogin($fromCookie) {
 		parent::afterLogin($fromCookie);
 		
@@ -68,8 +67,8 @@ class NotifiedWebUser extends CWebUser {
 	 * Shortcut to notity the currently logged in user
 	 * @param type $message
 	 */
-	public function notify($message) {
-		$this->getNotifier()->send($this->id,$message);
+	public function notify($message,$type='notification') {
+		$this->getNotifier()->send($this->id,$message,$type);
 	}
 
 }

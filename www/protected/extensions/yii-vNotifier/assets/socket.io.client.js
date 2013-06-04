@@ -1,29 +1,36 @@
 /**
  * @namespace
  */
-vNotifier = {};
+vn = {};
 /**
  * @class
  */
-vNotifier.Client = function(config) {
-		// socket io client
-	var socket = io.connect(config.socketioUrl + '?secret=' + config.userSecret),
-		// notification area
-		notificationArea = document.getElementById('notification-area'),
-		// KnockoutJS View Model
-		viewModel = {
-			notifications : ko.observableArray()
-		};
-
-	ko.applyBindings(viewModel,notificationArea);
+vn.Client = function(clientConfig) {
+	// socket io client
+	var config = {};
+	if(clientConfig.socketioUrl.match(/aws\.af\.cm/)) {
+		// API Server hosted on AppFog
+		config.transport = ['xhr-polling'];
+	}
+	var socket = io.connect(clientConfig.socketioUrl + '?secret=' + clientConfig.userSecret);
 	
 	// handle notify event
-	socket.on('notify',function(message) {
-		viewModel.notifications.push({message : message});
-		// auto remove first message after 5sec
-		setTimeout(function() {
-			viewModel.notifications.shift();
-		}, 5000);
+	socket.on('notify',function(notification) {
+		if(vn.NotificationHandlers[notification.type]) {
+			vn.NotificationHandlers[notification.type](notification.message);
+		} else {
+			vn.NotificationHandlers['__default__'](notification.message);
+		}
 	});
-
 }
+
+/**
+ * Custom Notification handlers
+ */
+vn.NotificationHandlers = {
+	__default__ : function(message) {
+		console.log(message);
+	}
+};
+
+

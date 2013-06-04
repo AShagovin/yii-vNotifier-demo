@@ -66,9 +66,8 @@ return array(
 		),
 		'notifier' => array(
 			'class' => 'ext.yii-vNotifier.VNotifier',
-			'messageStoreConfig' => array(	
-				'class' => 'LocalMessageStore',
-			),
+//			'appSecret' => 'QGad00kpgt0RHJyRkXXNfYnJv/NcOz2G17TBUIqAXr199VoM8oMaYk8THtmvcnAP',
+			'appSecret' => 'nonexistent',
 		),
 		'log'=>array(
 			'class'=>'CLogRouter',
