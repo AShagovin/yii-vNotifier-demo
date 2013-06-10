@@ -13,7 +13,7 @@ vn.Client = function(clientConfig) {
 		config.transport = ['xhr-polling'];
 	}
 	var socket = io.connect(clientConfig.socketioUrl + '?secret=' + clientConfig.userSecret);
-	
+
 	// handle notify event
 	socket.on('notify',function(notification) {
 		if(vn.NotificationHandlers[notification.type]) {
@@ -22,6 +22,10 @@ vn.Client = function(clientConfig) {
 			vn.NotificationHandlers['__default__'](notification.message);
 		}
 	});
+
+	if(clientConfig.callback) {
+		clientConfig.callback.apply(this);
+	}
 }
 
 /**

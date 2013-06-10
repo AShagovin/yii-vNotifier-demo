@@ -11,7 +11,7 @@ class VNotifier extends CApplicationComponent {
 	 * @var string
 	 */
 	public $apiUrl = 'http://localhost:4000';
-	public $appSecret = 'Coming Soon';
+	public $appSecret = 'Coming Soon --';
 
 	/**
 	 * Should we save the notifications to a persistent database or not
