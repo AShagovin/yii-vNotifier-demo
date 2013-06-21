@@ -98,7 +98,10 @@ class VNotifier extends CApplicationComponent {
 		curl_setopt($ch,CURLOPT_URL, $this->apiUrl.$url);
 		curl_setopt($ch,CURLOPT_POSTFIELDS, CJSON::encode($data));
 		curl_setopt($ch,CURLOPT_RETURNTRANSFER, 1);
-
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+			'Content-Type: application/json',
+		//	'Content-Length: ' . strlen($data_string)),
+		));                          
 		$response = curl_exec($ch);
 
 		$responseHttpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);

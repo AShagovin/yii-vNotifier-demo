@@ -3,7 +3,8 @@
 	"version": "0.0.1",
 	"private": true,
 	"dependencies": {
-		"redis" : "*",
-		"socket.io" : "*"
+		"redis" : "~0.8",
+		"socket.io" : "~0.9",
+		"express" : "~3.2"
 	}
 }

@@ -1,7 +1,7 @@
 var config = {
 	port : 4000,
 	redis : {
-		port : '6379',
+		port : 6379,
 		host : 'localhost'
 	}
 };
