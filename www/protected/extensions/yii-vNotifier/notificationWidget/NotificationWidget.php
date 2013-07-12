@@ -29,7 +29,7 @@ class NotificationWidget extends CWidget {
 
 			Yii::app()->clientScript->registerScriptFile($commonAssetUrl.'/socket.io.client.js');
 			$config = CJavaScript::encode(array(
-				'userSecret' => Yii::app()->user->getSecret(),
+				'userToken' => Yii::app()->user->getToken(),
 				'socketioUrl' => $this->getNotifier()->socketioUrl,
 				'callback' => 'js:vn.initKONotification',
 			));

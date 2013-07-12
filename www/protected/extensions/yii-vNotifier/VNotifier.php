@@ -33,7 +33,7 @@ class VNotifier extends CApplicationComponent {
 	 * @param type $message
 	 */
 	public function send($user_id,$message,$type = 'notification') {
-		$this->publish($this->getUserSecret($user_id), $message, $type);
+		$this->publish($this->getUserToken($user_id), $message, $type);
 	}
 	
 	/**
@@ -60,29 +60,29 @@ class VNotifier extends CApplicationComponent {
 	}
 
 	/**
-	 * Reads the user's secret from redis
+	 * Gets the user's token from the notification server
 	 * @param type $user_id
 	 * @return type
 	 */
-	public function getUserSecret($user_id) {
-		$response = $this->api('/getusersecret', array(
+	public function getUserToken($user_id) {
+		$response = $this->api('/getusertoken', array(
 			'user_id' => $user_id,
 		));
 
-		return $response['userSecret'];
+		return $response['userToken'];
 	}
 
 	/**
-	 * Generates a uniqe secret hash for the given user
+	 * Generates a uniqe token for the given user
 	 * @param type $user_id
 	 * @return type
 	 */
-	public function generateUserSecret($user_id,$refresh = false) {
-		$response = $this->api('/generateusersecret',array(
+	public function generateUserToken($user_id,$refresh = false) {
+		$response = $this->api('/generateusertoken',array(
 			'user_id' => $user_id,
 		));
 
-		return $response['userSecret'];
+		return $response['userToken'];
 	}
 	/**
 	 * Makes an api call

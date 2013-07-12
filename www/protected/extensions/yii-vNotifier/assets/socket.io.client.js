@@ -12,7 +12,7 @@ vn.Client = function(clientConfig) {
 		// API Server hosted on AppFog
 		config.transport = ['xhr-polling'];
 	}
-	var socket = io.connect(clientConfig.socketioUrl + '?secret=' + clientConfig.userSecret);
+	var socket = io.connect(clientConfig.socketioUrl + '?token=' + clientConfig.userToken);
 
 	// handle notify event
 	socket.on('notify',function(notification) {
