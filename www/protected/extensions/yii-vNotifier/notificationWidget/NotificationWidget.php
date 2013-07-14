@@ -32,6 +32,7 @@ class NotificationWidget extends CWidget {
 				'userToken' => Yii::app()->user->getToken(),
 				'socketioUrl' => $this->getNotifier()->socketioUrl,
 				'callback' => 'js:vn.initKONotification',
+				'getUserTokenUrl' => $this->getNotifier()->getUserTokenUrl,
 			));
 
 			Yii::app()->clientScript->registerScript('vNotifierClient',"var notifierClient = new vn.Client({$config})", CClientScript::POS_READY);

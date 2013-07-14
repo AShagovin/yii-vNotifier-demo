@@ -14,6 +14,11 @@ class VNotifier extends CApplicationComponent {
 	public $appSecret = 'Coming Soon --';
 
 	/**
+	 * @var string url of the action wich will send back a new / correct userToken
+	 */
+	public $getUserTokenUrl = null;
+
+	/**
 	 * Should we save the notifications to a persistent database or not
 	 * @var boolean
 	 */

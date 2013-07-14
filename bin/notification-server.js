@@ -1,7 +1,7 @@
 (function() {
   var api, app, config, express, io, redis, server;
 
-  config = require('./config.js');
+  config = require('./config.json');
 
   redis = require('redis');
 
@@ -30,11 +30,13 @@
     redisClient = redis.createClient(config.redis.port, config.redis.host);
     return io.set('authorization', function(handshakeData, callback) {
       if (handshakeData.query.token) {
-        if (redisClient.get(handshakeData.query.token)) {
-          return callback(null, true);
-        } else {
-          return callback(null, false);
-        }
+        return redisClient.get(handshakeData.query.token, function(err, reply) {
+          if (reply) {
+            return callback(null, true);
+          } else {
+            return callback(null, false);
+          }
+        });
       } else {
         return callback('Bad URL');
       }
@@ -44,7 +46,6 @@
   io.sockets.on('connection', function(socket) {
     var token, _redisClient;
     token = socket.manager.handshaken[socket.id].query.token;
-    console.log('=== token: ' + token);
     _redisClient = redis.createClient(config.redis.port, config.redis.host);
     _redisClient.on('message', function(channel, message) {
       return socket.emit('notify', JSON.parse(message));

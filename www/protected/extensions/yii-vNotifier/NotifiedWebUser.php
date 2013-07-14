@@ -16,7 +16,7 @@ class NotifiedWebUser extends CWebUser {
 	 * Unique Hash
 	 * @var string
 	 */
-	private $_secret;
+	private $_token;
 
 	/**
 	 * Returns the notifier application component
@@ -34,24 +34,34 @@ class NotifiedWebUser extends CWebUser {
 	public function afterLogin($fromCookie) {
 		parent::afterLogin($fromCookie);
 		
-		// genereate a tokent after login
-		// TODO: we should'nt generete a new token when a client is currently connected whit this user id.
-		$this->_secret = $this->getNotifier()->generateUserToken($this->id);
+		// load
+		$this->loadUserToken();
 	}
 
 	/**
 	 * Returns the currently logged in user's token
 	 * @return mixed
 	 */
-	public function getToken() {
+	public function getToken($forceLoad  = false) {
 		if($this->getIsGuest()) {
 			return null;
 		} else {
-			if(!isset($this->_secret))	{
-				$this->_secret = $this->getNotifier()->getUserToken($this->id);
-			}
 
-			return $this->_secret;
+			$this->loadUserToken($forceLoad);
+			return $this->_token;
+		}
+	}
+
+
+	private function loadUserToken($forceLoad = false) {
+
+		if(!isset($this->_token) || $forceLoad) {
+			$this->_token = $this->getNotifier()->getUserToken($this->id);
+
+			if(empty($this->token)) {
+				// generate a new token
+				$this->_token = $this->getNotifier()->generateUserToken($this->id);
+			}
 		}
 	}
 

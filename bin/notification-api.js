@@ -18,20 +18,20 @@
       return {
         generateusertoken: function(req, res) {
           return self.handleAPIRequest(req, res, function(req, res) {
-            return self.redisClient().get(req.headers.host + '_' + req.body.user_id, function(err, reply) {
+            return self.redisClient().get(self.getHostUserId(req), function(err, reply) {
               if (reply) {
                 return self.jsonResponse(res, {
                   userToken: reply
                 });
               } else {
-                return self.genToken(req.headers.host + '_' + req.body.user_id, res);
+                return self.genToken(self.getHostUserId(req), res);
               }
             });
           });
         },
         getusertoken: function(req, res) {
           return self.handleAPIRequest(req, res, function(req, res) {
-            return self.redisClient().get(req.headers.host + '_' + req.body.user_id, function(err, reply) {
+            return self.redisClient().get(self.getHostUserId(req), function(err, reply) {
               return self.jsonResponse(res, {
                 userToken: reply
               });
@@ -65,7 +65,11 @@
       return res.end(JSON.stringify(obj));
     };
 
-    NotificationApi.prototype.genToken = function(prefix, res) {
+    NotificationApi.prototype.getHostUserId = function(req) {
+      return req.headers.host + '_' + req.body.user_id;
+    };
+
+    NotificationApi.prototype.genToken = function(hUserId, res) {
       var redisclient, self;
       self = this;
       redisclient = this.redisClient();
@@ -74,9 +78,10 @@
         token = buf.toString('base64').replace(/\//g, '_').replace(/\+/g, '-');
         return redisclient.get(token, function(err, reply) {
           if (reply) {
-            return genToken(prefix, res);
+            return self.genToken(hUserId, res);
           } else {
-            redisclient.set(prefix, token);
+            redisclient.set(token, hUserId);
+            redisclient.set(hUserId, token);
             return self.jsonResponse(res, {
               userToken: token
             });
