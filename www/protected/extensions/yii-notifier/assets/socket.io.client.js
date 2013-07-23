@@ -49,7 +49,7 @@ vn.Client.prototype.initConnection = function() {
 		if(vn.NotificationHandlers[notification.type]) {
 			vn.NotificationHandlers[notification.type](notification.message);
 		} else {
-			vn.NotificationHandlers['__default__'](notification.message);
+			vn.NotificationHandlers.__default__(notification.message);
 		}
 	});
 };

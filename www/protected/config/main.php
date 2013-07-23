@@ -33,7 +33,7 @@ return array(
 	// application components
 	'components'=>array(
 		'user'=>array(
-			'class' => 'ext.yii-vNotifier.NotifiedWebUser',
+			'class' => 'ext.yii-notifier.NotifiedWebUser',
 			// enable cookie-based authentication
 			'allowAutoLogin'=>false,
 		),
@@ -65,8 +65,8 @@ return array(
 			'errorAction'=>'site/error',
 		),
 		'notifier' => array(
-			'class' => 'ext.yii-vNotifier.VNotifier',
-			'appSecret' => 'nonexistent',
+			'class' => 'ext.yii-notifier.Notifier',
+			'appSecret' => 'app_secret',
 			'getUserTokenUrl' => '/site/usertoken',
 		),
 		'log'=>array(

@@ -1,0 +1,24 @@
+#notification-area {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+}
+
+#notification-area ul {
+	list-style: none;
+}
+
+#notification-area ul li {
+	font-size: 11px;
+	font-family: 'Verdana','sans-serif';
+	display: block;
+	color: #666;
+	padding: 4px 8px;
+	border: 1px solid #bcbcbc;
+	border-radius: 2px;
+	box-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+	margin: 4px 0 0 0;
+	max-width: 160px;
+	background: #ececec;
+}
+

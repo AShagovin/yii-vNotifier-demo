@@ -8,7 +8,7 @@ class SiteController extends Controller
 	public function actions()
 	{
 		return array(
-			'usertoken' => 'ext.yii-vNotifier.GetUserTokenAction',
+			'usertoken' => 'ext.yii-notifier.GetUserTokenAction',
 		);
 	}
 

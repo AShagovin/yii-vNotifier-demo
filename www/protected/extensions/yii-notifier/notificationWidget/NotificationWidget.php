@@ -16,8 +16,8 @@ class NotificationWidget extends CWidget {
 		parent::init();
 
 		if(Yii::app()->user->canReceiveNotification()) {
-			$commonAssetUrl = Yii::app()->assetManager->publish(Yii::getPathOfAlias('ext.yii-vNotifier.assets'),false,-1,true);
-			$widgetAssetUrl = Yii::app()->assetManager->publish(Yii::getPathOfAlias('ext.yii-vNotifier.notificationWidget.assets'),false,-1,true);
+			$commonAssetUrl = Yii::app()->assetManager->publish(Yii::getPathOfAlias('ext.yii-notifier.assets'),false,-1,true);
+			$widgetAssetUrl = Yii::app()->assetManager->publish(Yii::getPathOfAlias('ext.yii-notifier.notificationWidget.assets'),false,-1,true);
 
 			Yii::app()->clientScript->registerCssFile($widgetAssetUrl.'/notification-widget.css');
 
