@@ -1,3 +1,7 @@
+/.chef/tmp
+/.chef/site-cookbooks
+/.vagrant
 /bin/node_modules
 /www/assets/*
 /www/protected/runtime/*
+
