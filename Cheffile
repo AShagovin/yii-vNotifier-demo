@@ -1,6 +1,9 @@
 site "http://community.opscode.com/api/v1"
 
-cookbook "yum"
+cookbook "apt"
 cookbook "apache2"
 cookbook "php"
+
+cookbook "yii",
+  :git => "https://github.com/szeist/cookbook-yii"
 
